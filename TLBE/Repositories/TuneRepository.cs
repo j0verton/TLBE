@@ -7,5 +7,11 @@ namespace TLBE.Repositories
 {
     public class TuneRepository
     {
+
+        //get tunes by user (id)?
+
+        //add tune 
+
+        //add tune collection
     }
 }
