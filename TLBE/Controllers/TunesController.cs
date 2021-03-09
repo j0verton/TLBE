@@ -33,6 +33,13 @@ namespace TLBE.Controllers
             return Ok(tunes);
         }
 
+
+        [HttpPut("star/{id}")]
+        public IActionResult StarTune(int id)
+        {
+            _tunesRepo.StarTune(id);
+                return NoContent();
+        }
         //get tunes by userid
         //get starred tunes by userId
 

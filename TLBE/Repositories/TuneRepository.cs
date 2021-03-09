@@ -36,11 +36,14 @@ namespace TLBE.Repositories
             //_context.Tune.Attach(tune);
             //_context.Entry(tune).Property(x => )
 
+            //is this right?
             var tune = _context.Tune
                 .Where(t=> t.Id ==id).FirstOrDefault();
             tune.Starred = true;
             _context.SaveChanges();
         }
+
+
         //get tunes by user (id)?
 
         //add tune 
