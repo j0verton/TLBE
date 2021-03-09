@@ -43,6 +43,15 @@ namespace TLBE.Repositories
             _context.SaveChanges();
         }
 
+        public void UnstarTune(int id)
+        {
+             //is this right?
+            var tune = _context.Tune
+                .Where(t => t.Id == id).FirstOrDefault();
+            tune.Starred = false;
+            _context.SaveChanges();
+        }
+
 
         //get tunes by user (id)?
 
