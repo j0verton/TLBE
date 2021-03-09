@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TLBE.Data;
 using TLBE.Models;
 
 namespace TLBE.Repositories
@@ -14,7 +15,22 @@ namespace TLBE.Repositories
         {
             _context = context;
         }
-        public List<Tune> GetTunesByUserId()
+        public List<Tune> GetTunesByUserId(int id)
+        {
+            return _context.Tune
+               .Where(t => t.UserId == id)
+               .ToList();
+        }
+
+        public List<Tune> GetStarredTunesByUserId(int id)
+        {
+            return _context.Tune
+           .Where(t => t.UserId == id)
+           .Where(t => t.Starred ==true)
+           .ToList();
+        }
+
+        public void StarTune(id)
         { 
         
         }

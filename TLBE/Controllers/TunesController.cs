@@ -20,12 +20,18 @@ namespace TLBE.Controllers
 
 
         [HttpGet("{id}")]
-        public IActionResult GetTunesByUserId()
+        public IActionResult GetTunesByUserId(int id)
         {
-            var tunes = _tunesRepo.GetTunesByUserId();
+            var tunes = _tunesRepo.GetTunesByUserId(id);
             return Ok(tunes);
         }
 
+        [HttpGet("starred/{id}")]
+        public IActionResult GetStarredTunesByUserId(int id)
+        {
+            var tunes = _tunesRepo.GetStarredTunesByUserId(id);
+            return Ok(tunes);
+        }
 
         //get tunes by userid
         //get starred tunes by userId
