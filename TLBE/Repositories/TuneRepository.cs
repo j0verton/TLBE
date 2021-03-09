@@ -30,9 +30,16 @@ namespace TLBE.Repositories
            .ToList();
         }
 
-        public void StarTune(id)
-        { 
-        
+        public void StarTune(int id)
+        {
+            //var tune = new Tune() { Id = id };
+            //_context.Tune.Attach(tune);
+            //_context.Entry(tune).Property(x => )
+
+            var tune = _context.Tune
+                .Where(t=> t.Id ==id).FirstOrDefault();
+            tune.Starred = true;
+            _context.SaveChanges();
         }
         //get tunes by user (id)?
 
