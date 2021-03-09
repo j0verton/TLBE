@@ -7,7 +7,7 @@ using TLBE.Models;
 
 namespace TLBE.Repositories
 {
-    public class TuneRepository
+    public class TuneRepository : ITuneRepository
     {
 
         private readonly ApplicationDbContext _context;
@@ -26,7 +26,7 @@ namespace TLBE.Repositories
         {
             return _context.Tune
            .Where(t => t.UserId == id)
-           .Where(t => t.Starred ==true)
+           .Where(t => t.Starred == true)
            .ToList();
         }
 
@@ -38,14 +38,14 @@ namespace TLBE.Repositories
 
             //is this right?
             var tune = _context.Tune
-                .Where(t=> t.Id ==id).FirstOrDefault();
+                .Where(t => t.Id == id).FirstOrDefault();
             tune.Starred = true;
             _context.SaveChanges();
         }
 
         public void UnstarTune(int id)
         {
-             //is this right?
+            //is this right?
             var tune = _context.Tune
                 .Where(t => t.Id == id).FirstOrDefault();
             tune.Starred = false;

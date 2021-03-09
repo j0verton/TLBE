@@ -19,9 +19,11 @@ namespace TLBE.Controllers
         }
 
 
+        //need a get current user method, modify get tunes
         [HttpGet("{id}")]
         public IActionResult GetTunesByUserId(int id)
         {
+
             var tunes = _tunesRepo.GetTunesByUserId(id);
             return Ok(tunes);
         }
