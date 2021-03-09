@@ -40,6 +40,14 @@ namespace TLBE.Controllers
             _tunesRepo.StarTune(id);
                 return NoContent();
         }
+
+        [HttpPut("unstar/{id}")]
+        public IActionResult UnstarTune(int id)
+        {
+            _tunesRepo.UnstarTune(id);
+            return NoContent();
+        }
+
         //get tunes by userid
         //get starred tunes by userId
 
