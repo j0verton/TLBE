@@ -52,7 +52,11 @@ namespace TLBE.Repositories
             _context.SaveChanges();
         }
 
-
+        public void AddTune(Tune tune)
+        {
+            _context.Add(tune);
+            _context.SaveChanges();
+        }
         //get tunes by user (id)?
 
         //add tune 

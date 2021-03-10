@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TLBE.Models;
 
 namespace TLBE.Controllers
 {
@@ -49,6 +50,14 @@ namespace TLBE.Controllers
             _tunesRepo.UnstarTune(id);
             return NoContent();
         }
+
+        [HttpPost]
+        public IActionResult AddTune(Tune tune)
+        {
+            _tunesRepo.AddTune(tune);
+            return NoContent();
+        }
+
 
         //get tunes by userid
         //get starred tunes by userId

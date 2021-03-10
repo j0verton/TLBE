@@ -5,6 +5,7 @@ namespace TLBE.Repositories
 {
     public interface ITuneRepository
     {
+        void AddTune(Tune tune);
         List<Tune> GetStarredTunesByUserId(int id);
         List<Tune> GetTunesByUserId(int id);
         void StarTune(int id);
