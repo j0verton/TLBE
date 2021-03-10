@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TLBE.Models;
+using TLBE.Repositories;
 
 namespace TLBE.Controllers
 {
@@ -13,10 +14,10 @@ namespace TLBE.Controllers
     public class TunesController : ControllerBase
     {
 
-        private readonly ITunesRepository _tunesRepo;
-        public TunesController(ITunesRepository tunesRepo)
+        private readonly ITuneRepository _tuneRepo;
+        public TunesController(ITuneRepository tunesRepo)
         {
-            _tunesRepo = tunesRepo;
+            _tuneRepo = tunesRepo;
         }
 
 
@@ -25,14 +26,14 @@ namespace TLBE.Controllers
         public IActionResult GetTunesByUserId(int id)
         {
 
-            var tunes = _tunesRepo.GetTunesByUserId(id);
+            var tunes = _tuneRepo.GetTunesByUserId(id);
             return Ok(tunes);
         }
 
         [HttpGet("starred/{id}")]
         public IActionResult GetStarredTunesByUserId(int id)
         {
-            var tunes = _tunesRepo.GetStarredTunesByUserId(id);
+            var tunes = _tuneRepo.GetStarredTunesByUserId(id);
             return Ok(tunes);
         }
 
@@ -40,21 +41,21 @@ namespace TLBE.Controllers
         [HttpPut("star/{id}")]
         public IActionResult StarTune(int id)
         {
-            _tunesRepo.StarTune(id);
+            _tuneRepo.StarTune(id);
                 return NoContent();
         }
 
         [HttpPut("unstar/{id}")]
         public IActionResult UnstarTune(int id)
         {
-            _tunesRepo.UnstarTune(id);
+            _tuneRepo.UnstarTune(id);
             return NoContent();
         }
 
         [HttpPost]
         public IActionResult AddTune(Tune tune)
         {
-            _tunesRepo.AddTune(tune);
+            _tuneRepo.AddTune(tune);
             return NoContent();
         }
 

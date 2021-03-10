@@ -9,5 +9,15 @@ namespace TLBE.Repositories
     {
 
 
+
+
+        //getcollectionsbyuser
+        //getcustomcollectionsbyuser
+        //addCustomCOllection
+        //saveCOllection
+        //delete collection - maybe dont do this just pull collections where Tunes > 0
+
+        //
+
     }
 }
