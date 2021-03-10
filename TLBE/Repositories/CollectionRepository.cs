@@ -1,17 +1,28 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TLBE.Data;
+using TLBE.Models;
 
 namespace TLBE.Repositories
 {
     public class CollectionRepository
     {
+        private readonly ApplicationDbContext _context;
+        public CollectionRepository(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+        public List<Collection> GetCollectionsByUserId(int id)
+        {
+            return _context.Collection
+                .Include(c => c.Tunes)
+                .Where(c=> c.UserId ==id)
+                .ToList();
+        }
 
-
-
-
-        //getcollectionsbyuser
         //getcustomcollectionsbyuser
         //addCustomCOllection
         //saveCOllection
