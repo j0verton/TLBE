@@ -23,6 +23,13 @@ namespace TLBE.Repositories
                 .ToList();
         }
 
+        public void saveCollection(Collection collection)
+        {
+            _context.Add(collection);
+                _context.SaveChanges();
+        
+        }
+
         //getcustomcollectionsbyuser
         //addCustomCOllection
         //saveCOllection
