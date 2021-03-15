@@ -3,20 +3,21 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using TLBE.Models;
 
 namespace TLBE.Repositories
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class Controller : ControllerBase
+    public class TLController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
 
-        public Controller(IUserRepository userRepository)
+        public TLController(IUserRepository userRepository)
         {
             _userRepository = userRepository;
-
         }
         private User GetCurrentUser()
         {
