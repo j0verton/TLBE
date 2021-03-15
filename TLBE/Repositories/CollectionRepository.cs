@@ -8,7 +8,7 @@ using TLBE.Models;
 
 namespace TLBE.Repositories
 {
-    public class CollectionRepository
+    public class CollectionRepository : ICollectionRepository
     {
         private readonly ApplicationDbContext _context;
         public CollectionRepository(ApplicationDbContext context)
@@ -19,15 +19,15 @@ namespace TLBE.Repositories
         {
             return _context.Collection
                 .Include(c => c.Tunes)
-                .Where(c=> c.UserId ==id)
+                .Where(c => c.UserId == id)
                 .ToList();
         }
 
         public void saveCollection(Collection collection)
         {
             _context.Add(collection);
-                _context.SaveChanges();
-        
+            _context.SaveChanges();
+
         }
 
         //getcustomcollectionsbyuser
