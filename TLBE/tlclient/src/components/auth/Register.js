@@ -1,74 +1,57 @@
-import React, { useRef } from "react"
+import React, { useContext, useState } from "react";
+import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom"
 import { Button } from "semantic-ui-react"
+import { UserProfileContext } from "../providers/UserProfileProvider";
+
 // import video from "../../video/ibs-video.mp4"
 import "./Login.css"
 
 export const Register = (props) => {
+    const { register } = useContext(UserProfileContext);
+    const [loading, setLoading] = useState(false);
     const firstName = useRef()
     const lastName = useRef()
     const username = useRef()
     const email = useRef()
-    let emailExist = false
-    const conflictDialog = useRef()
-    const history = useHistory()
+    const [password, setPassword] = useState("");
+    const [confirm, setConfirm] = useState("");
+    const history = useHistory();
 
-    const existingUserCheck = () => {
-        return fetch(`http://localhost:8088/users?email=${email.current.value}`)
-            .then(res => res.json())
-            .then(user => user.length ? emailExist = true : emailExist = false)
-            .then(existingNameCheck)
-    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
 
-    const existingNameCheck = () => {
-        return fetch(`http://localhost:8088/users`)
-            .then(res => res.json())
-            .then(users => users.find(user => user.username.toUpperCase() === username.current.value.toUpperCase()))
-    }
+        if (password !== confirm) {
+            toast.error("Passwords do not match");
+            return;
+        }
 
-    const handleRegister = (e) => {
-        e.preventDefault()
-
-        existingUserCheck()
-            .then((userExists) => {
-                if (!userExists && !emailExist) {
-                    fetch("http://localhost:8088/users", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            email: email.current.value,
-                            name: `${firstName.current.value}  ${lastName.current.value}`,
-                            username: username.current.value
-                        })
-                    })
-                        .then(_ => _.json())
-                        .then(createdUser => {
-                            if (createdUser.hasOwnProperty("id")) {
-                                localStorage.setItem("tunes_user", createdUser.id)
-                                history.push("/")
-                            }
-                        })
-                }
-                else {
-                    conflictDialog.current.showModal()
-                }
+        setLoading(true);
+        const profile = {
+            firstName,
+            lastName,
+            username,
+            email,
+        };
+        register(profile, password)
+            .then((user) => {
+                setLoading(false);
+                toast.info(`Welcome ${user.username}`);
+                history.push("/");
             })
+            .catch((err) => {
+                setLoading(false);
+                toast.error("Invalid email");
+            });
+    };
 
-    }
 
     return (
         <>
             <div className="mainContainer">
                 <main className="container--login" style={{ textAlign: "center" }}>
 
-                    <dialog className="dialog dialog--password" ref={conflictDialog}>
-                        <div>Account with that email address or username already exists</div>
-                        <button className="button--close" onClick={e => conflictDialog.current.close()}>Close</button>
-                    </dialog>
-
-                    <form className="form--login" onSubmit={handleRegister}>
+                    <form className="form--login" onSubmit={handleSubmit}>
                         <h1 className="h3 mb-3 font-weight-normal">Please Register for TuneList</h1>
                         <fieldset>
                             <label htmlFor="firstName"> First Name </label>

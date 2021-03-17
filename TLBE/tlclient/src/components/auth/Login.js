@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import React, { useRef, useContext, useState } from "react"
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -11,8 +11,9 @@ import "./Login.css"
 export const Login = props => {
     const { login, logout } = useContext(UserProfileContext);
     const [loading, setLoading] = useState(false);
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const email = useRef()
+    const password = useRef()
+    // const [password, setPassword] = useState("");
     const history = useHistory();
 
     const email = useRef()
@@ -75,6 +76,14 @@ export const Login = props => {
                                     id="email"
                                     className="form-control"
                                     placeholder="Email address"
+                                    required />
+                            </fieldset>
+                            <fieldset>
+                                <label htmlFor="inputPassword"> Password </label>
+                                <input ref={password} type="password"
+                                    id="password"
+                                    className="form-control"
+                                    placeholder="Password"
                                     required />
                             </fieldset>
                             <fieldset>
