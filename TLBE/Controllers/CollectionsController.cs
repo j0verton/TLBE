@@ -28,7 +28,9 @@ namespace TLBE.Controllers
         {
             User user = GetCurrentUser();
             var collections = _collectionRepository.GetCollectionsByUserId(user.Id);
-            return Ok(collections);
+            var sortedCollection = collections.Select(coll => coll.Tunes.OrderBy(t => t.Name));
+            //should sort the tunes alphabetically here
+            return Ok(sortedCollection);
         }
 
         private User GetCurrentUser()
