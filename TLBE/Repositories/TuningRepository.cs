@@ -7,7 +7,7 @@ using TLBE.Models;
 
 namespace TLBE.Repositories
 {
-    public class TuningRepository
+    public class TuningRepository : ITuningRepository
     {
         private readonly ApplicationDbContext _context;
         public TuningRepository(ApplicationDbContext context)
