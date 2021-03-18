@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TLBE.Data;
+using TLBE.Models;
 
 namespace TLBE.Repositories
 {
     public class TuningRepository
     {
         private readonly ApplicationDbContext _context;
-        //gettunings
         public TuningRepository(ApplicationDbContext context)
         {
             _context = context;
@@ -19,6 +20,11 @@ namespace TLBE.Repositories
             return _context.Tuning
                     .ToList();
         }
-        //addTuning
+
+        public void AddTuning(Tuning tuning)
+        {
+            _context.Add(tuning);
+            _context.SaveChanges();
+        }
     }
 }
