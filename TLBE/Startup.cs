@@ -13,6 +13,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TLBE.Repositories;
+using TLBE.Data;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace TLBE
 {
@@ -33,6 +36,8 @@ namespace TLBE
             services.AddTransient<ITuningRepository, TuningRepository>();
             services.AddTransient<ITuneRepository, TuneRepository>();
             services.AddControllers();
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
             var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";
             services
@@ -49,7 +54,10 @@ namespace TLBE
                         ValidateLifetime = true
                     };
                 });
+            services.AddControllers()
+                .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
         }
+    
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -63,6 +71,7 @@ namespace TLBE
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
