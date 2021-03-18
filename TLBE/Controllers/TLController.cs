@@ -19,7 +19,7 @@ namespace TLBE.Repositories
         {
             _userRepository = userRepository;
         }
-        private User GetCurrentUser()
+        private UserProfile GetCurrentUser()
         {
             var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             return _userRepository.GetByFirebaseUserId(firebaseUserId);

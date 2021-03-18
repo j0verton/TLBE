@@ -26,14 +26,14 @@ namespace TLBE.Controllers
         [HttpGet]
         public IActionResult GetUserCollections()
         {
-            User user = GetCurrentUser();
+            UserProfile user = GetCurrentUser();
             var collections = _collectionRepository.GetCollectionsByUserId(user.Id);
             var sortedCollection = collections.Select(coll => coll.Tunes.OrderBy(t => t.Name));
             //collections themselves arent sorted
             return Ok(sortedCollection);
         }
 
-        private User GetCurrentUser()
+        private UserProfile GetCurrentUser()
         {
             var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             return _userRepository.GetByFirebaseUserId(firebaseUserId);

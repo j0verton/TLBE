@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SteelDaily.Models;
+using TLBE.Models;
 using TLBE.Repositories;
 using System;
 using System.Collections.Generic;
@@ -27,7 +27,7 @@ namespace SteelDaily.Controllers
         public IActionResult GetAllUsers()
         {
 
-            var profiles = _repo.GetProfiles();
+            var profiles = _repo.GetUserProfiles();
             return Ok(profiles);
         }
 
@@ -50,7 +50,6 @@ namespace SteelDaily.Controllers
         [HttpPost]
         public IActionResult Post(UserProfile userProfile)
         {
-            userProfile.CreateDateTime = DateTime.Now;
             _repo.Add(userProfile);
             return CreatedAtAction(
                 nameof(GetUserProfile),
@@ -71,3 +70,4 @@ namespace SteelDaily.Controllers
             }
         }
     }
+}

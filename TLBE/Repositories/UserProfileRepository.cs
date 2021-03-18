@@ -17,31 +17,31 @@ namespace TLBE.Repositories
             _context = context;
         }
 
-        public List<User> GetUserProfiles()
+        public List<UserProfile> GetUserProfiles()
         {
             return _context.User
                 .OrderBy(up => up.Username)
                 .ToList();
         }
-        public User GetUserProfileById(int id)
+        public UserProfile GetUserProfileById(int id)
         {
             return _context.User
                 .FirstOrDefault(up => up.Id == id);
         }
 
-        public User GetByFirebaseUserId(string firebaseUserId)
+        public UserProfile GetByFirebaseUserId(string firebaseUserId)
         {
             return _context.User
                 .FirstOrDefault(u => u.FirebaseUserId == firebaseUserId);
 
         }
 
-        public void Add(User user)
+        public void Add(UserProfile user)
         {
             _context.Add(user);
             _context.SaveChanges();
         }
-        public void Update(User user)
+        public void Update(UserProfile user)
         {
             _context.Entry(user).State = EntityState.Modified;
             _context.SaveChanges();
