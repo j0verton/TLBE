@@ -8,22 +8,22 @@ using TLBE.Models;
 
 namespace TLBE.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class UserProfileRepository : IUserProfileRepository
     {
         private readonly ApplicationDbContext _context;
 
-        public UserRepository(ApplicationDbContext context)
+        public UserProfileRepository(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public List<User> GetUsers()
+        public List<User> GetUserProfiles()
         {
             return _context.User
                 .OrderBy(up => up.Username)
                 .ToList();
         }
-        public User GetUserById(int id)
+        public User GetUserProfileById(int id)
         {
             return _context.User
                 .FirstOrDefault(up => up.Id == id);

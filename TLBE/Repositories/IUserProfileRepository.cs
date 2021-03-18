@@ -3,12 +3,12 @@ using TLBE.Models;
 
 namespace TLBE.Repositories
 {
-    public interface IUserRepository
+    public interface IUserProfileRepository
     {
         void Add(User user);
         User GetByFirebaseUserId(string firebaseUserId);
-        User GetUserById(int id);
-        List<User> GetUsers();
+        User GetUserProfileById(int id);
+        List<User> GetUserProfiles();
         void Update(User user);
     }
 }

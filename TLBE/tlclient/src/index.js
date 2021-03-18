@@ -6,6 +6,13 @@ import store from './app/store';
 import { Provider } from 'react-redux';
 import 'semantic-ui-css/semantic.min.css'
 import { TuneList } from './TuneList';
+import firebase from "firebase/app";
+
+
+const firebaseConfig = {
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+};
+firebase.initializeApp(firebaseConfig);
 
 ReactDOM.render(
   <React.StrictMode>

@@ -15,9 +15,9 @@ namespace TLBE.Controllers
     public class CollectionsController : ControllerBase
     {
         private readonly ICollectionRepository _collectionRepository;
-        private readonly IUserRepository _userRepository;
+        private readonly IUserProfileRepository _userRepository;
 
-        public CollectionsController(ICollectionRepository collectionRepository, IUserRepository userRepository)
+        public CollectionsController(ICollectionRepository collectionRepository, IUserProfileRepository userRepository)
         {
             _collectionRepository = collectionRepository;
             _userRepository = userRepository;

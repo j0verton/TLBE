@@ -13,9 +13,9 @@ namespace TLBE.Repositories
     [ApiController]
     public class TLController : ControllerBase
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUserProfileRepository _userRepository;
 
-        public TLController(IUserRepository userRepository)
+        public TLController(IUserProfileRepository userRepository)
         {
             _userRepository = userRepository;
         }
