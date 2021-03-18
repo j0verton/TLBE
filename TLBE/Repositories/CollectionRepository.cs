@@ -17,10 +17,17 @@ namespace TLBE.Repositories
         }
         public List<Collection> GetCollectionsByUserId(int id)
         {
-            return _context.Collection
-                .Include(c => c.Tunes)
-                .Where(c => c.UserId == id)
-                .ToList();
+            try
+            {
+                return _context.Collection
+                    .Include(c => c.Tunes)
+                    .Where(c => c.UserId == id)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                return new List<Collection>();
+            }
         }
 
         public void saveCollection(Collection collection)

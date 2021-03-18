@@ -7,5 +7,8 @@ namespace TLBE.Models
 {
     public class TuneCollection
     {
+        public int Id { get; set; }
+        public int CollectionId { get; set; }
+        public int TuneId { get; set; }
     }
 }

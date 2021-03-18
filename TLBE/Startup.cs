@@ -36,7 +36,7 @@ namespace TLBE
             services.AddTransient<ITuningRepository, TuningRepository>();
             services.AddTransient<ITuneRepository, TuneRepository>();
             services.AddControllers();
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))).EnableSensitiveDataLogging();
 
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
             var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";
