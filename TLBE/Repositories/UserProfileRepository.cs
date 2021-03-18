@@ -31,9 +31,15 @@ namespace TLBE.Repositories
 
         public UserProfile GetByFirebaseUserId(string firebaseUserId)
         {
-            return _context.UserProfile
-                .FirstOrDefault(u => u.FirebaseUserId == firebaseUserId);
-
+            try
+            {
+                return _context.UserProfile
+                    .FirstOrDefault(u => u.FirebaseUserId == firebaseUserId);
+            }
+            catch (Exception ex)
+            {
+                return new UserProfile();
+            }
         }
 
         public void Add(UserProfile userProfile)

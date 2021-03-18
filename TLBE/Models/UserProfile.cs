@@ -12,6 +12,8 @@ namespace TLBE.Models
 
         public string Username { get; set; }
 
+        public string Name { get; set; }
+
         public string Email { get; set; }
 
         public List<Collection> Collections { get; set; }

@@ -15,16 +15,16 @@ DROP TABLE IF EXISTS [Photos]
 
 CREATE TABLE [UserProfile](
    Id       INTEGER  NOT NULL PRIMARY KEY 
-  ,Username VARCHAR(12) NOT NULL
+  ,[Username] VARCHAR(12) NOT NULL
   ,Name     VARCHAR(17) NOT NULL
   ,Email    VARCHAR(20) NOT NULL
   ,[FirebaseUserId] NVARCHAR(28) NOT NULL
 );
-INSERT INTO [UserProfile](Id,Username,Name,Email, FirebaseUserId) VALUES (1,'Joe','Joe Overton','me@me.com', '09q9hn1Za8PUnHJlsAk0Wey8ztw1');
-INSERT INTO [UserProfile](Id,Username,Name,Email, FirebaseUserId) VALUES (2,'Jeff','Jeff Jeffity Jeff','Jeff@jeffityjeff.com', 'gbKdG17uSseqr8zlUoCoTfaxNfq1');
-INSERT INTO [UserProfile](Id,Username,Name,Email, FirebaseUserId) VALUES (3,'Sue','Sue Shu','sue_1982317@aol.com', 'HkBOT0tsNINZDL2131cjPtTEmPY2');
-INSERT INTO [UserProfile](Id,Username,Name,Email, FirebaseUserId) VALUES (4,'SJ','Steve  Johnson','steve@aol.com', 'mZWySgbBtIOWTSpxSFt330bvq8f1');
-INSERT INTO [UserProfile](Id,Username,Name,Email, FirebaseUserId) VALUES (5,'littleStevie','Uptown  Stan','oooo@joe.com','2WVu2j8ZE8Yyii1jIgfidmZ45Ik1');
+INSERT INTO [UserProfile](Id,[Username],Name,Email, FirebaseUserId) VALUES (1,'Joe','Joe Overton','me@me.com', '09q9hn1Za8PUnHJlsAk0Wey8ztw1');
+INSERT INTO [UserProfile](Id,[Username],Name,Email, FirebaseUserId) VALUES (2,'Jeff','Jeff Jeffity Jeff','Jeff@jeffityjeff.com', 'gbKdG17uSseqr8zlUoCoTfaxNfq1');
+INSERT INTO [UserProfile](Id,[Username],Name,Email, FirebaseUserId) VALUES (3,'Sue','Sue Shu','sue_1982317@aol.com', 'HkBOT0tsNINZDL2131cjPtTEmPY2');
+INSERT INTO [UserProfile](Id,[Username],Name,Email, FirebaseUserId) VALUES (4,'SJ','Steve  Johnson','steve@aol.com', 'mZWySgbBtIOWTSpxSFt330bvq8f1');
+INSERT INTO [UserProfile](Id,[Username],Name,Email, FirebaseUserId) VALUES (5,'littleStevie','Uptown  Stan','oooo@joe.com','2WVu2j8ZE8Yyii1jIgfidmZ45Ik1');
 
 CREATE TABLE Tunes(
 	Id      INTEGER  NOT NULL PRIMARY KEY 
