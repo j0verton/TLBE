@@ -10,7 +10,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 
 
-namespace SteelDaily.Controllers
+namespace TLBE.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

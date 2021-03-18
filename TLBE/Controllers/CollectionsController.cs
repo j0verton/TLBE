@@ -17,10 +17,10 @@ namespace TLBE.Controllers
         private readonly ICollectionRepository _collectionRepository;
         private readonly IUserProfileRepository _userRepository;
 
-        public CollectionsController(ICollectionRepository collectionRepository, IUserProfileRepository userRepository)
+        public CollectionsController(ICollectionRepository collectionRepository, IUserProfileRepository userProfileRepository)
         {
             _collectionRepository = collectionRepository;
-            _userRepository = userRepository;
+            _userRepository = userProfileRepository;
         }
 
         [HttpGet]
