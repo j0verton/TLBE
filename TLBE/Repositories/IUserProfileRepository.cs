@@ -5,10 +5,10 @@ namespace TLBE.Repositories
 {
     public interface IUserProfileRepository
     {
-        void Add(UserProfile user);
+        void Add(UserProfile userProfile);
         UserProfile GetByFirebaseUserId(string firebaseUserId);
         UserProfile GetUserProfileById(int id);
         List<UserProfile> GetUserProfiles();
-        void Update(UserProfile user);
+        void Update(UserProfile userProfile);
     }
 }
