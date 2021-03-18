@@ -21,7 +21,7 @@ namespace TLBE.Repositories
             {
                 return _context.Collection
                     .Include(c => c.TuneCollections)
-                        .ThenInclude(tc => tc.Tune)
+                        //.ThenInclude(tc => tc.Tune)
                     .Where(c => c.UserProfileId == id)
                     .ToList();
             }

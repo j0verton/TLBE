@@ -19,5 +19,5 @@ namespace TLBE.Data
         public DbSet<Tuning> Tuning { get; set; }
 
         public DbSet<TuneCollection> TuneCollection { get; set; }
-}
+    }
 }
