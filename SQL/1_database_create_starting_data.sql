@@ -110,9 +110,9 @@ INSERT INTO Collections(Id,UserId,Name,Custom) VALUES (27,1,'G/GDGD',NULL);
 INSERT INTO Collections(Id,UserId,Name,Custom) VALUES (28,1,'GA tunes','true');
 
 CREATE TABLE TuneCollections(
-   TuneId       INTEGER  NOT NULL PRIMARY KEY 
+   Id       INTEGER  NOT NULL PRIMARY KEY 
   ,CollectionId INTEGER 
-  ,Id           INTEGER  NOT NULL
+  ,TuneId           INTEGER  NOT NULL
 );
 INSERT INTO TuneCollections(TuneId,CollectionId,Id) VALUES (3,2,3);
 INSERT INTO TuneCollections(TuneId,CollectionId,Id) VALUES (4,1,4);
