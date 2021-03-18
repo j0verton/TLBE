@@ -18,14 +18,14 @@ namespace TLBE.Repositories
         public List<Tune> GetTunesByUserId(int id)
         {
             return _context.Tune
-               .Where(t => t.UserId == id)
+               .Where(t => t.UserProfileId == id)
                .ToList();
         }
 
         public List<Tune> GetStarredTunesByUserId(int id)
         {
             return _context.Tune
-           .Where(t => t.UserId == id)
+           .Where(t => t.UserProfileId == id)
            .Where(t => t.Starred == true)
            .ToList();
         }

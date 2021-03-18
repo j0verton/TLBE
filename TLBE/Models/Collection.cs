@@ -10,6 +10,6 @@ namespace TLBE.Models
         public int Id { get; set; }
         public int UserProfileId { get; set; }
         public string Name { get; set; }
-        public List<Tune> Tunes { get; set; }
+        public List<TuneCollection> TuneCollections { get; set; }
     }
 }
