@@ -27,13 +27,13 @@ INSERT INTO [UserProfile](Id,Username,Name,Email, FirebaseUserId) VALUES (4,'SJ'
 INSERT INTO [UserProfile](Id,Username,Name,Email, FirebaseUserId) VALUES (5,'littleStevie','Uptown  Stan','oooo@joe.com','2WVu2j8ZE8Yyii1jIgfidmZ45Ik1');
 
 CREATE TABLE Tunes(
-   UserId      INTEGER  NOT NULL PRIMARY KEY 
+	Id      INTEGER  NOT NULL PRIMARY KEY 
   ,Name        VARCHAR(60) NOT NULL
   ,tuneCollections     VARCHAR(2) NOT NULL
   ,Tuning      VARCHAR(8) NOT NULL
   ,AudioUpload VARCHAR(91)
   ,ImageUpload VARCHAR(91)
-  ,Id          INTEGER  NOT NULL
+  ,UserId          INTEGER  NOT NULL
   ,Starred     BIT 
   ,Source      VARCHAR(16)
   ,Notes       VARCHAR(89)
