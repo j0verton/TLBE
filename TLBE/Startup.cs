@@ -30,7 +30,7 @@ namespace TLBE
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
             services.AddTransient<ICollectionRepository, CollectionRepository>();
             services.AddTransient<ITuningRepository, TuningRepository>();
-            services.AddTransient<ITunesRepository, TunesRepository>();
+            services.AddTransient<ITuneRepository, TuneRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
