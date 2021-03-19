@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Container, Divider, Segment, Header, Icon, Rating, Embed } from "semantic-ui-react"
-import { TuneContext } from "./components/tunes/TuneProvider";
+import { TuneContext } from "./providers/TuneProvider"
 import "./Home.css"
 import { TuneCard } from "./components/tunes/TuneCard";
 import { AudioPlayer } from "./components/AudioPlayer";
