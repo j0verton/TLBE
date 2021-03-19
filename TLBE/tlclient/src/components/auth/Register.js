@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom"
 import { Button } from "semantic-ui-react"
-import { UserProfileContext } from "../providers/UserProfileProvider";
+import { UserProfileContext } from "../../providers/UserProfileProvider";
 
 // import video from "../../video/ibs-video.mp4"
 import "./Login.css"

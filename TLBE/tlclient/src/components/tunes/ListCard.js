@@ -2,38 +2,38 @@ import React, { useState, useRef, useContext, useEffect } from "react"
 import "./Tune.css"
 import { Button, Container, Divider, Header, Rating } from 'semantic-ui-react'
 import { TuneCard } from "./TuneCard"
-import { TuneContext } from "./TuneProvider"
-import { CollectionContext } from "../collections/CollectionsProvider"
+// import { TuneContext } from "./TuneProvider"
+// import { CollectionContext } from "../collections/CollectionsProvider"
 import { AudioPlayer } from "../AudioPlayer"
 
 export const ListCard = ({ collectionId, parentCallback }) => {
-    const [modal, showModal] = useState(false)
-    const [tuneObj, setTuneObj] = useState({})
-    const { addStarToTune, removeStarFromTune } = useContext(TuneContext)
-    const { tuneCollections, getTuneCollectionsByCollectionIdWithTunes } = useContext(CollectionContext)
-    const [tunesArr, setTunesArr] = useState([])
-    const tuneRef = useRef(null)
+    // const [modal, showModal] = useState(false)
+    // const [tuneObj, setTuneObj] = useState({})
+    // const { addStarToTune, removeStarFromTune } = useContext(TuneContext)
+    // const { tuneCollections, getTuneCollectionsByCollectionIdWithTunes } = useContext(CollectionContext)
+    // const [tunesArr, setTunesArr] = useState([])
+    // const tuneRef = useRef(null)
 
-    const handleOpen = () => {
-        showModal(true)
-    }
+    // const handleOpen = () => {
+    //     showModal(true)
+    // }
 
-    const handleClose = () => {
-        showModal(false)
-    }
+    // const handleClose = () => {
+    //     showModal(false)
+    // }
 
-    const handleStar = (event, data) => {
-        const [prefix, tuneId] = data.id.split("__")
-        data.rating === 0 ? removeStarFromTune(tuneId) : addStarToTune(tuneId)
-    }
+    // const handleStar = (event, data) => {
+    //     const [prefix, tuneId] = data.id.split("__")
+    //     data.rating === 0 ? removeStarFromTune(tuneId) : addStarToTune(tuneId)
+    // }
 
-    useEffect(() => {
-        getTuneCollectionsByCollectionIdWithTunes(collectionId)
-    }, [])
+    // useEffect(() => {
+    //     getTuneCollectionsByCollectionIdWithTunes(collectionId)
+    // }, [])
 
-    useEffect(() => {
-        setTunesArr(tuneCollections.map(entry => entry.tune))
-    }, [tuneCollections])
+    // useEffect(() => {
+    //     setTunesArr(tuneCollections.map(entry => entry.tune))
+    // }, [tuneCollections])
 
     return tunesArr[0] ? (
         <><Container

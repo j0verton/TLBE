@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react"
 import "./Tune.css"
 import { Button, Header, Icon, Modal, Rating, Image } from 'semantic-ui-react'
-import { TuneContext } from "./TuneProvider"
+import { TuneContext } from "../../Providers/TuneProvider"
 import { useHistory, useParams } from "react-router-dom"
 
 export const TuneCard = (props) => {
