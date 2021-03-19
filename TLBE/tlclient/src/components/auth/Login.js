@@ -14,9 +14,6 @@ export const Login = props => {
     const email = useRef()
     const password = useRef()
     // const [password, setPassword] = useState("");
-    const history = useHistory();
-
-    const email = useRef()
     const existDialog = useRef()
     const history = useHistory()
 
