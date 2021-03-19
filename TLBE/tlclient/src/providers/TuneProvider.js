@@ -25,7 +25,18 @@ export const TuneProvider = props => {
             )
     }
 
-
+    const addTune = tuneObj => {
+        return getToken().then((token) =>
+            fetch("/api/tune", {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(tuneObj),
+            }).then((resp) => resp.json())
+        );
+    };
 
 
 
