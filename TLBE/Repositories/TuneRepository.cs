@@ -30,6 +30,13 @@ namespace TLBE.Repositories
            .ToList();
         }
 
+        public Tune GetTuneById(int id)
+        {
+            return _context.Tune
+                    .Where(t => t.Id == id)
+                    .FirstOrDefault();
+        }
+
         public void StarTune(int id)
         {
             //var tune = new Tune() { Id = id };
