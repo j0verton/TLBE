@@ -55,7 +55,24 @@ namespace TLBE.Controllers
         [HttpPost]
         public IActionResult AddTune(Tune tune)
         {
-            _tuneRepo.AddTune(tune);
+            //standard tuning and the collection doesn't exist
+            if (tune.Tuning == "Standard" && !response.includes(tune.key))
+            {
+
+            }
+                //tune is in an alternate tuning and the collection doesn't exist
+            else if (tune.tuning != "Standard" && !response.includes(`${ tune.Key}/${ tune.Tuning}`)) 
+            {
+
+            }
+            //collection exists
+        } 
+        else 
+        {
+        }
+             
+
+                _tuneRepo.AddTune(tune);
             return NoContent();
         }
 
