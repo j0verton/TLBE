@@ -38,6 +38,7 @@ namespace TLBE.Controllers
             foreach (Collection col in collections)
             {
                 var newCollection = new CollectionWithTunes(col);
+
                 foreach (TuneCollection tc in newCollection.Collection.TuneCollections)
                 {
                     newCollection.Tunes.Add(_tuneRepository.GetTuneById(tc.TuneId));

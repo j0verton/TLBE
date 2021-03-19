@@ -10,6 +10,7 @@ namespace TLBE.Models.ViewModels
         public CollectionWithTunes(Collection collection)
         {
             Collection = collection;
+            Tunes = new List<Tune>();
         }
 
         public Collection Collection { get; set; }

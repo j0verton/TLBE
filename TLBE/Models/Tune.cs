@@ -19,7 +19,8 @@ namespace TLBE.Models
         public string Link { get; set; }
 
         public bool Starred { get; set; }
-        public int Learning { get; set; }
+        //public bool Learning { get; set; }
+        public string AudioUpload { get; set; }
 
     }
 }
