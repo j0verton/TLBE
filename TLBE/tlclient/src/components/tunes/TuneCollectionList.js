@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react"
 import "./Tune.css"
 import { Tab } from "semantic-ui-react"
-import { CollectionContext } from "../collections/CollectionsProvider"
-import { TuneContext } from "./TuneProvider"
+// import { CollectionContext } from "../../providers/CollectionsProvider"
+import { TuneContext } from "../../providers/TuneProvider"
 import { ListCard } from "./ListCard"
 
 export const TunesList = (props) => {
