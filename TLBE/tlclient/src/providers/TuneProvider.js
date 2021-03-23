@@ -38,29 +38,6 @@ export const TuneProvider = props => {
         );
     };
 
-
-
-
-    // adds new Tunes to database
-    const saveTune = tuneObj => {
-
-    }
-
-    const postNewTune = (tuneObj, tuneCollectionsObj) => {
-        return fetch('http://localhost:8088/tunes', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(tuneObj)
-        })
-            .then(res => res.json())
-            .then(res => {
-                tuneCollectionsObj.tuneId = res.id
-                addTuneCollections(tuneCollectionsObj)
-            })
-    }
-
     const getLastTune = () => {
         return fetch('http://localhost:8088/tunes?_sort=id&_order=desc&_limit=1')
             .then(response => response.json())
