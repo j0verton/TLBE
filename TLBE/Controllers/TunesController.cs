@@ -109,6 +109,8 @@ namespace TLBE.Controllers
         [HttpPut]
         public IActionResult EditTune(Tune tune)
         {
+            var existingTune = _tuneRepo.GetTuneById(tune.Id)
+            // if tuning or key change need to edit collection and TC 
             return NoContent();
 
 

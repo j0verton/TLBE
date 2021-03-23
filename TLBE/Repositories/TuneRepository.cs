@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -70,6 +71,12 @@ namespace TLBE.Repositories
         //add tune 
 
         //add tune collection
+
+        public void EditTune(Tune tune)
+        {
+            _context.Entry(tune).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
         public void AddTuneCollection(TuneCollection tc)
         {
             _context.Add(tc);
