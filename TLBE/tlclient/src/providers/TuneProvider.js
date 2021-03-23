@@ -43,64 +43,7 @@ export const TuneProvider = props => {
 
     // adds new Tunes to database
     const saveTune = tuneObj => {
-        //set up an object for the join table "tuneCollections"
-        let tuneCollectionsObj = { tuneId: tuneObj.id }
-        // get all the users collections
-        getCollectionsByUserId(localStorage.getItem("tunes_user"))
-            //
-            .then(res => {
-                return res.map(response => {
-                    return response.name
-                })
-            })
-            .then(response => {
-                //standard tuning and the collection doesn't exist
-                if (tuneObj.tuning === "Standard" && !response.includes(tuneObj.key)) {
-                    saveCollection(tuneObj.tuning, tuneObj.key)
-                        .then(() => getCollectionsByUserId(localStorage.getItem("tunes_user")))
-                        .then(collections => {
-                            return collections.find(collection => collection.name === tuneObj.key)
-                        }
-                        )
-                        .then(res => {
-                            tuneCollectionsObj.collectionId = res.id
-                        })
-                        .then(() => {
-                            postNewTune(tuneObj, tuneCollectionsObj)
-                        })
-                    //tune is in an alternate tuning and the collection doesn't exist
-                } else if (tuneObj.tuning !== "Standard" && !response.includes(`${tuneObj.key}/${tuneObj.tuning}`)) {
-                    saveCollection(tuneObj.tuning, tuneObj.key)
-                        .then(() => {
-                            return getCollectionsByUserId(localStorage.getItem("tunes_user"))
-                        })
-                        .then(collections => {
 
-                            return collections.find(collection => collection.name === `${tuneObj.key}/${tuneObj.tuning}`)
-                        }
-                        )
-                        .then(res => {
-                            tuneCollectionsObj.collectionId = res.id
-                        })
-                        .then(() => {
-                            postNewTune(tuneObj, tuneCollectionsObj)
-                        })
-                    //collection exists
-                } else {
-                    getCollectionsByUserId(localStorage.getItem("tunes_user"))
-                        .then(collections => {
-                            let foundCollection = collections.find(collection => {
-                                return collection.name === `${tuneObj.key}/${tuneObj.tuning}` || collection.name === `${tuneObj.key}`
-                            })
-                            return foundCollection
-                        })
-                        .then(foundCollection => {
-                            tuneCollectionsObj.collectionId = foundCollection.id
-                            postNewTune(tuneObj, tuneCollectionsObj)
-
-                        })
-                }
-            })
     }
 
     const postNewTune = (tuneObj, tuneCollectionsObj) => {
@@ -118,15 +61,6 @@ export const TuneProvider = props => {
             })
     }
 
-    const addTuneCollections = tuneCollectionsObj => {
-        return fetch('http://localhost:8088/tuneCollections', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(tuneCollectionsObj)
-        })
-    }
     const getLastTune = () => {
         return fetch('http://localhost:8088/tunes?_sort=id&_order=desc&_limit=1')
             .then(response => response.json())
