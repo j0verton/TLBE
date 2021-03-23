@@ -60,19 +60,43 @@ namespace TLBE.Controllers
         [HttpPost]
         public IActionResult AddTune(Tune tune)
         {
-            //get user collections
+            Tune newTune = _tuneRepo.AddTune(tune);
+            CheckCollectionThenAddCollectionAndTuneCollection(newTune);
+            return NoContent();
+        }
+        [HttpPut]
+        public IActionResult EditTune(Tune tune)
+        {
+            var existingTune = _tuneRepo.GetTuneById(tune.Id);
+            if (tune.Tuning != existingTune.Tuning || tune.Key != existingTune.Key)
+            {
+                //tuning or key has changed, need to update TC-join table and maybe collection
+                CheckCollectionThenAddCollectionAndTuneCollection(tune);
+            }
+            _tuneRepo.EditTune(tune);
+            return NoContent();
+        }
+
+
+
+        private UserProfile GetCurrentUser()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _userRepository.GetByFirebaseUserId(firebaseUserId);
+        }
+
+        private void CheckCollectionThenAddCollectionAndTuneCollection(Tune tune)
+        {
             var user = GetCurrentUser();
             var collections = _collectionRepository.GetCollectionsByUserId(user.Id);
-
-            //Tunings are named either "key" or "key/tuning"
-            //this checks for a matching collection with either of these naming conventions
             List<Collection> currentCollection = collections.Where(c => (c.Name == tune.Tuning) || (c.Name == $"{tune.Key}/{tune.Tuning}")).ToList();
             if (currentCollection.Count() == 0)
             {
                 //collection doesn't exist 
                 //add Collection
                 string collName = "";
-                if (tune.Tuning == "Standard") {
+                if (tune.Tuning == "Standard")
+                {
                     collName = tune.Key;
                 }
                 else
@@ -85,44 +109,25 @@ namespace TLBE.Controllers
                     UserProfileId = user.Id,
                     Name = collName
                 };
-
                 Collection newColl = _collectionRepository.saveCollection(collToAdd);
 
-                Tune newTune = _tuneRepo.AddTune(tune);
-                var tc = new TuneCollection(newColl.Id, newTune.Id);
+                var tc = new TuneCollection(newColl.Id, tune.Id);
                 _tuneRepo.AddTuneCollection(tc);
-                return NoContent();
+                
             }
             else
             {
                 //collection exists
-                Tune newTune = _tuneRepo.AddTune(tune);                
                 //add TC
-                var tc = new TuneCollection(currentCollection[0].Id, newTune.Id);
+                var tc = new TuneCollection(currentCollection[0].Id, tune.Id);
 
                 _tuneRepo.AddTuneCollection(tc);
 
-                return NoContent();
 
             }
         }
-        [HttpPut]
-        public IActionResult EditTune(Tune tune)
-        {
-            var existingTune = _tuneRepo.GetTuneById(tune.Id)
-            // if tuning or key change need to edit collection and TC 
-            return NoContent();
 
 
-        }
-
-
-
-        private UserProfile GetCurrentUser()
-        {
-            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            return _userRepository.GetByFirebaseUserId(firebaseUserId);
-        }
     }
 }
 
