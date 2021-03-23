@@ -13,10 +13,12 @@ namespace TLBE.Controllers
     [ApiController]
     public class TunesController : ControllerBase
     {
+        private readonly ICollectionRepository _collectionRepository;
 
         private readonly ITuneRepository _tuneRepo;
-        public TunesController(ITuneRepository tunesRepo)
+        public TunesController(ITuneRepository tunesRepo, ICollectionRepository collectionRepository)
         {
+            _collectionRepository = collectionRepository;
             _tuneRepo = tunesRepo;
         }
 
@@ -55,45 +57,53 @@ namespace TLBE.Controllers
         [HttpPost]
         public IActionResult AddTune(Tune tune)
         {
-            //standard tuning and the collection doesn't exist
-            if (tune.Tuning == "Standard" && !response.includes(tune.key))
+            //get user collections
+            var user = GetCurrentUser();
+            var collections = _collectionRepository.GetCollectionsByUserId(user.Id);
+            
+
+            //standard tuning and the collection doesn't exist    
+            if (tune.Tuning == "Standard" && collections.Where(c => c.Name == tune.Tuning).Count() == 0)
             {
 
             }
                 //tune is in an alternate tuning and the collection doesn't exist
-            else if (tune.tuning != "Standard" && !response.includes(`${ tune.Key}/${ tune.Tuning}`)) 
+            else if (tune.Tuning != "Standard" && !response.includes(`${ tune.Key}/${ tune.Tuning}`)) 
             {
 
             }
             //collection exists
         } 
         else 
+
+                _tuneRepo.AddTune(tune);
+            return NoContent();
         {
         }
              
 
-                _tuneRepo.AddTune(tune);
-            return NoContent();
+    private UserProfile GetCurrentUser()
+    {
+        var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        return _userRepository.GetByFirebaseUserId(firebaseUserId);
+    }
         }
 
 
-        //get tunes by userid
-        //get starred tunes by userId
+    //get tunes by userid
+    //get starred tunes by userId
 
-        //save tune - includes add to collection or add collection
+    //save tune - includes add to collection or add collection
 
-        //get last tune (not sure what i used this one for probably skip)
-        //edit tune
-        //star tune
-        //remove star
-        //add audio to tune
+    //get last tune (not sure what i used this one for probably skip)
+    //edit tune
+    //star tune
+    //remove star
+    //add audio to tune
 
-        //delete tune
-        // delete tuneCollection
+    //delete tune
+    // delete tuneCollection
 
-        //get tune by id with TC
+    //get tune by id with TC
 
-        //get tune by id
-
-    }
-}
+    //get tune by id
