@@ -14,12 +14,14 @@ namespace TLBE.Controllers
     public class TunesController : ControllerBase
     {
         private readonly ICollectionRepository _collectionRepository;
-
+        private readonly IUserProfileRepository _userRepository;
         private readonly ITuneRepository _tuneRepo;
-        public TunesController(ITuneRepository tunesRepo, ICollectionRepository collectionRepository)
+        public TunesController(ITuneRepository tunesRepo, ICollectionRepository collectionRepository, IUserProfileRepository userProfileRepository)
         {
             _collectionRepository = collectionRepository;
             _tuneRepo = tunesRepo;
+            _userRepository = userProfileRepository;
+
         }
 
 
@@ -71,8 +73,8 @@ namespace TLBE.Controllers
                 string collName = "";
                 if (tune.Tuning == "Standard") {
                     collName = tune.Key;
-                } 
-                else 
+                }
+                else
                 {
                     collName = $"{tune.Key}/{tune.Tuning}";
                 }
@@ -83,28 +85,28 @@ namespace TLBE.Controllers
                     Name = collName
                 };
 
-                _collectionRepository.saveCollection(collToAdd);
+                Collection newColl = _collectionRepository.saveCollection(collToAdd);
 
                 Tune newTune = _tuneRepo.AddTune(tune);
-
-                _tuneRepo.AddTuneCollection(newColl.Id, newTune.Id);
-                    return NoContent();
+                var tc = new TuneCollection(newColl.Id, newTune.Id);
+                _tuneRepo.AddTuneCollection(tc);
+                return NoContent();
             }
             else
             {
                 //collection exists
                 _tuneRepo.AddTune(tune);
                 //add TC
-                var tc = new TuneCollection(currentCollection[0].Id, )
-        
+                var tc = new TuneCollection(currentCollection[0].Id, );
+
                 _tuneRepo.AddTuneCollection(tc);
 
                 return NoContent();
 
             }
-
-        {
         }
+
+      
              
 
     private UserProfile GetCurrentUser()
