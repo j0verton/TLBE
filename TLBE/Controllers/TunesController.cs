@@ -60,24 +60,43 @@ namespace TLBE.Controllers
             //get user collections
             var user = GetCurrentUser();
             var collections = _collectionRepository.GetCollectionsByUserId(user.Id);
-            
 
-            //standard tuning and the collection doesn't exist    
-            if (tune.Tuning == "Standard" && collections.Where(c => c.Name == tune.Tuning).Count() == 0)
+            //Tunings are named either "key" or "key/tuning"
+            //this checks for a matching collection with either of these naming conventions
+            if (collections.Where(c => (c.Name == tune.Tuning) || (c.Name == $"{tune.Key}/{tune.Tuning}")).Count() == 0)
             {
+                //collection doesn't exist 
+                //add Collection
+                string collName = "";
+                if (tune.Tuning == "Standard") {
+                    collName = tune.Key;
+                } 
+                else 
+                {
+                    collName = $"{tune.Key}/{tune.Tuning}";
+                }
+                var collToAdd = new Collection() 
+                { 
+                UserProfileId = user.Id,
+                Name = collName
 
-            }
-                //tune is in an alternate tuning and the collection doesn't exist
-            else if (tune.Tuning != "Standard" && !response.includes(`${ tune.Key}/${ tune.Tuning}`)) 
-            {
-
-            }
-            //collection exists
-        } 
-        else 
+                }
+                _collectionRepository.saveCollection()
 
                 _tuneRepo.AddTune(tune);
-            return NoContent();
+                //add TC
+                return NoContent();
+            }
+            else
+            {
+                //collection exists
+                _tuneRepo.AddTune(tune);
+                //add TC
+
+                return NoContent();
+
+            }
+
         {
         }
              
