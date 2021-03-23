@@ -40,100 +40,113 @@ export const TuneProvider = props => {
 
     // allows user to edit their Tunes
     const editTune = tuneObj => {
-        getTuneByIdWithTC(tuneObj.id).then(res => {
-            if (res.tuning === tuneObj.tuning && res.key === tuneObj.key) {
-                return fetch(`http://localhost:8088/tunes/${tuneObj.id}`, {
-                    method: 'PUT',
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(tuneObj)
-                })
-            } else {
-                deleteTune(res.id)
-                    .then(() => {
-                        delete tuneObj.id
-                        saveTune(tuneObj)
-                    })
-            }
-        })
+        return getToken().then((token) =>
+            fetch("/api/tune", {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(tuneObj)
+            })
+        )
     }
 
-    const addStarToTune = (tuneId) => {
-        return getToken().then((token) => {
-            fetch(`api/star/${tuneId}`, {
-                method: 'PATCH',
+
+    getTuneByIdWithTC(tuneObj.id).then(res => {
+        if (res.tuning === tuneObj.tuning && res.key === tuneObj.key) {
+            return fetch(`http://localhost:8088/tunes/${tuneObj.id}`, {
+                method: 'PUT',
                 headers: {
                     "Content-Type": "application/json"
-                }
+                },
+                body: JSON.stringify(tuneObj)
             })
-        })
-    }
+        } else {
+            deleteTune(res.id)
+                .then(() => {
+                    delete tuneObj.id
+                    saveTune(tuneObj)
+                })
+        }
+    })
+}
 
-    const addAudioToTune = (id, url) => {
-        return fetch(`http://localhost:8088/tunes/${id}`, {
+const addStarToTune = (tuneId) => {
+    return getToken().then((token) => {
+        fetch(`api/star/${tuneId}`, {
             method: 'PATCH',
             headers: {
                 "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                audioUpload: url
-            })
+            }
         })
-    }
+    })
+}
 
-    const removeStarFromTune = (tuneId) => {
-        return fetch(`http://localhost:8088/tunes/${tuneId}`, {
-            method: 'PATCH',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                starred: 0
-            })
+const addAudioToTune = (id, url) => {
+    return fetch(`http://localhost:8088/tunes/${id}`, {
+        method: 'PATCH',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            audioUpload: url
         })
-    }
-    // removes Tune from database
-    const deleteTune = tuneId => {
-        return fetch(`http://localhost:8088/tunes/${tuneId}`, {
-            method: 'DELETE'
+    })
+}
+
+const removeStarFromTune = (tuneId) => {
+    return fetch(`http://localhost:8088/tunes/${tuneId}`, {
+        method: 'PATCH',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            starred: 0
         })
-            .then(deleteUnusedCollections)
-    }
+    })
+}
+// removes Tune from database
+const deleteTune = tuneId => {
+    return fetch(`http://localhost:8088/tunes/${tuneId}`, {
+        method: 'DELETE'
+    })
+        .then(deleteUnusedCollections)
+}
 
-    const deleteTuneCollections = tuneCollectionsId => {
-        return fetch(`http://localhost:8088/tuneCollections/${tuneCollectionsId}`, {
-            method: 'DELETE'
-        })
-    }
+const deleteTuneCollections = tuneCollectionsId => {
+    return fetch(`http://localhost:8088/tuneCollections/${tuneCollectionsId}`, {
+        method: 'DELETE'
+    })
+}
 
-    const getTuneByIdWithTC = id => {
-        return fetch(`http://localhost:8088/tunes/${id}?_embed=tuneCollections`)
-            .then(res => res.json())
-    }
+const getTuneByIdWithTC = id => {
+    return fetch(`http://localhost:8088/tunes/${id}?_embed=tuneCollections`)
+        .then(res => res.json())
+}
 
-    const getTuneById = id => {
-        return fetch(`http://localhost:8088/tunes/${id}`)
-            .then(res => res.json())
-    }
+const getTuneById = id => {
+    return fetch(`http://localhost:8088/tunes/${id}`)
+        .then(res => res.json())
+}
 
-    const getTunesByUserId = (userId) => {
-        return fetch(`http://localhost:8088/tunes/?userId=${userId}`)
-            .then(res => res.json())
-        // .then(setTunes)
-    }
+const getTunesByUserId = (userId) => {
+    return fetch(`http://localhost:8088/tunes/?userId=${userId}`)
+        .then(res => res.json())
+    // .then(setTunes)
+}
 
-    const getStarredTunesByUserId = (userId) => {
-        return fetch(`http://localhost:8088/tunes/?userId=${userId}&starred=1`)
-            .then(res => res.json())
-        // .then(setTunes)
-    }
+const getStarredTunesByUserId = (userId) => {
+    return fetch(`http://localhost:8088/tunes/?userId=${userId}&starred=1`)
+        .then(res => res.json())
+    // .then(setTunes)
+}
 
-    return (
-        <TuneContext.Provider value={{
-            tune, tunes, getTunes, saveTune, editTune, deleteTune, getTuneById, getTunesByUserId, getStarredTunesByUserId, addStarToTune, removeStarFromTune, addAudioToTune, addTuneCollections
-        }}>
-            {props.children}
-        </TuneContext.Provider>
-    )
+return (
+    <TuneContext.Provider value={{
+        tune, tunes, getTunes, saveTune, editTune, deleteTune, getTuneById, getTunesByUserId, getStarredTunesByUserId, addStarToTune, removeStarFromTune, addAudioToTune, addTuneCollections
+    }}>
+        {props.children}
+    </TuneContext.Provider>
+)
 }

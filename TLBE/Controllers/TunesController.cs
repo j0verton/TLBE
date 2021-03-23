@@ -106,7 +106,13 @@ namespace TLBE.Controllers
 
             }
         }
+        [HttpPut]
+        public IActionResult EditTune(Tune tune)
+        {
+            return NoContent();
 
+
+        }
 
 
 
