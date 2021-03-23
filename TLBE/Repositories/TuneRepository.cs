@@ -69,5 +69,10 @@ namespace TLBE.Repositories
         //add tune 
 
         //add tune collection
+        public void AddTuneCollection(TuneCollection tc)
+        {
+            _context.Add(tc);
+            _context.SaveChanges();
+        }
     }
 }

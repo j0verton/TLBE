@@ -75,13 +75,14 @@ namespace TLBE.Controllers
                 {
                     collName = $"{tune.Key}/{tune.Tuning}";
                 }
-                var collToAdd = new Collection() 
-                { 
-                UserProfileId = user.Id,
-                Name = collName
 
-                }
-                _collectionRepository.saveCollection()
+                var collToAdd = new Collection()
+                {
+                    UserProfileId = user.Id,
+                    Name = collName
+                };
+
+                _collectionRepository.saveCollection(collToAdd);
 
                 _tuneRepo.AddTune(tune);
                 //add TC
