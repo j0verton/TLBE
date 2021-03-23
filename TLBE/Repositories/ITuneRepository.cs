@@ -7,6 +7,7 @@ namespace TLBE.Repositories
     {
         Tune AddTune(Tune tune);
         void AddTuneCollection(TuneCollection tc);
+        void EditTune(Tune tune);
         List<Tune> GetStarredTunesByUserId(int id);
         Tune GetTuneById(int id);
         List<Tune> GetTunesByUserId(int id);
