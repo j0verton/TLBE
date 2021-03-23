@@ -11,5 +11,11 @@ namespace TLBE.Models
         public int CollectionId { get; set; }
         public int TuneId { get; set; }
         public Tune Tune { get; }
+
+        public TuneCollection(int collId, int tuneId)
+        {
+            CollectionId = collId;
+                TuneId = tuneId;
+        }
     }
 }

@@ -31,11 +31,11 @@ namespace TLBE.Repositories
             }
         }
 
-        public void saveCollection(Collection collection)
+        public Collection saveCollection(Collection collection)
         {
             _context.Add(collection);
             _context.SaveChanges();
-
+            return collection;
         }
 
         //getcustomcollectionsbyuser

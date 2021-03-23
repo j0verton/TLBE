@@ -63,7 +63,8 @@ namespace TLBE.Controllers
 
             //Tunings are named either "key" or "key/tuning"
             //this checks for a matching collection with either of these naming conventions
-            if (collections.Where(c => (c.Name == tune.Tuning) || (c.Name == $"{tune.Key}/{tune.Tuning}")).Count() == 0)
+            var currentCollection = collections.Where(c => (c.Name == tune.Tuning) || (c.Name == $"{tune.Key}/{tune.Tuning}"));
+            if (currentCollection.Count() == 0)
             {
                 //collection doesn't exist 
                 //add Collection
@@ -84,15 +85,19 @@ namespace TLBE.Controllers
 
                 _collectionRepository.saveCollection(collToAdd);
 
-                _tuneRepo.AddTune(tune);
-                //add TC
-                return NoContent();
+                Tune newTune = _tuneRepo.AddTune(tune);
+
+                _tuneRepo.AddTuneCollection(newColl.Id, newTune.Id);
+                    return NoContent();
             }
             else
             {
                 //collection exists
                 _tuneRepo.AddTune(tune);
                 //add TC
+                var tc = new TuneCollection(currentCollection[0].Id, )
+        
+                _tuneRepo.AddTuneCollection(tc);
 
                 return NoContent();
 
