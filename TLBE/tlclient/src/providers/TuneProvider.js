@@ -38,11 +38,6 @@ export const TuneProvider = props => {
         );
     };
 
-    const getLastTune = () => {
-        return fetch('http://localhost:8088/tunes?_sort=id&_order=desc&_limit=1')
-            .then(response => response.json())
-    }
-
     // allows user to edit their Tunes
     const editTune = tuneObj => {
         getTuneByIdWithTC(tuneObj.id).then(res => {
@@ -65,13 +60,12 @@ export const TuneProvider = props => {
     }
 
     const addStarToTune = (tuneId) => {
-        return fetch(`http://localhost:8088/tunes/${tuneId}`, {
-            method: 'PATCH',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                starred: 1
+        return getToken().then((token) => {
+            fetch(`api/star/${tuneId}`, {
+                method: 'PATCH',
+                headers: {
+                    "Content-Type": "application/json"
+                }
             })
         })
     }
