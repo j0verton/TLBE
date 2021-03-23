@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using TLBE.Models;
 using TLBE.Repositories;
@@ -46,7 +47,7 @@ namespace TLBE.Controllers
         public IActionResult StarTune(int id)
         {
             _tuneRepo.StarTune(id);
-                return NoContent();
+            return NoContent();
         }
 
         [HttpPut("unstar/{id}")]
@@ -65,7 +66,7 @@ namespace TLBE.Controllers
 
             //Tunings are named either "key" or "key/tuning"
             //this checks for a matching collection with either of these naming conventions
-            var currentCollection = collections.Where(c => (c.Name == tune.Tuning) || (c.Name == $"{tune.Key}/{tune.Tuning}"));
+            List<Collection> currentCollection = collections.Where(c => (c.Name == tune.Tuning) || (c.Name == $"{tune.Key}/{tune.Tuning}"));
             if (currentCollection.Count() == 0)
             {
                 //collection doesn't exist 
@@ -95,9 +96,9 @@ namespace TLBE.Controllers
             else
             {
                 //collection exists
-                _tuneRepo.AddTune(tune);
+                Tune newTune = _tuneRepo.AddTune(tune);                
                 //add TC
-                var tc = new TuneCollection(currentCollection[0].Id, );
+                var tc = new TuneCollection(currentCollection[0].Id, newTune.Id);
 
                 _tuneRepo.AddTuneCollection(tc);
 
@@ -106,15 +107,16 @@ namespace TLBE.Controllers
             }
         }
 
-      
-             
 
-    private UserProfile GetCurrentUser()
-    {
-        var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        return _userRepository.GetByFirebaseUserId(firebaseUserId);
-    }
+
+
+        private UserProfile GetCurrentUser()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _userRepository.GetByFirebaseUserId(firebaseUserId);
         }
+    }
+}
 
 
     //get tunes by userid
