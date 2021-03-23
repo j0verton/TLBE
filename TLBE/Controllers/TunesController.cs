@@ -66,7 +66,7 @@ namespace TLBE.Controllers
 
             //Tunings are named either "key" or "key/tuning"
             //this checks for a matching collection with either of these naming conventions
-            List<Collection> currentCollection = collections.Where(c => (c.Name == tune.Tuning) || (c.Name == $"{tune.Key}/{tune.Tuning}"));
+            List<Collection> currentCollection = collections.Where(c => (c.Name == tune.Tuning) || (c.Name == $"{tune.Key}/{tune.Tuning}")).ToList();
             if (currentCollection.Count() == 0)
             {
                 //collection doesn't exist 
