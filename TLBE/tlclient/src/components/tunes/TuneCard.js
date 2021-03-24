@@ -6,7 +6,7 @@ import { useHistory, useParams } from "react-router-dom"
 
 export const TuneCard = (props) => {
     //useContext hook allows the use of functions form the tuneProvider
-    const { saveTune, deleteTune, addStarToTune, removeStarFromTune } = useContext(TuneContext)
+    const { addTune, deleteTune, addStarToTune, removeStarFromTune } = useContext(TuneContext)
     const history = useHistory()
     const [alert, showAlert] = useState(false)
     const handleStar = (event, data) => {
@@ -76,7 +76,7 @@ export const TuneCard = (props) => {
                             newTuneObj.userId = parseInt(localStorage.getItem("tunes_user"))
                             delete newTuneObj.id
                             newTuneObj.notes = ""
-                            saveTune(newTuneObj)
+                            addTune(newTuneObj)
                             showAlert(true)
                             history.push(`/users`)
                         }}>

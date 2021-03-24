@@ -8,11 +8,11 @@ import { AudioPlayer } from "../AudioPlayer"
 
 export const ListCard = ({ collectionId, parentCallback, tunesArr }) => {
     const [modal, showModal] = useState(false)
-    // const [tuneObj, setTuneObj] = useState({})
+    const [tuneObj, setTuneObj] = useState({})
     const { addStarToTune, removeStarFromTune } = useContext(TuneContext)
     // const { tuneCollections, getTuneCollectionsByCollectionIdWithTunes } = useContext(CollectionContext)
     // const [tunesArr, setTunesArr] = useState([])
-    // const tuneRef = useRef(null)
+    const tuneRef = useRef(null)
 
     const handleOpen = () => {
         showModal(true)
