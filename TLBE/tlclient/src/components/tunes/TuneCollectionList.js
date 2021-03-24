@@ -7,7 +7,7 @@ import { ListCard } from "./ListCard"
 
 export const TunesList = (props) => {
     const { getTunesByUserId, getTunesInCollectionForCurrentUser } = useContext(TuneContext)
-    const { collections, getCollectionsByUserId } = useContext(CollectionContext)
+    // const { collections, getCollectionsByUserId } = useContext(CollectionContext)
     const [tunes, setTunes] = useState([])
     const [userCollections, setUserCollections] = useState([])
     const [changes, setChanges] = useState([])
@@ -28,7 +28,7 @@ export const TunesList = (props) => {
                 setPanes(paneObjects)
             }
         })
-    }, [userCollections, tunes, collections, changes])
+    }, [userCollections, tunes, changes])
 
     return panes.length ? (
         <Tab renderActiveOnly id="ListTabs" activeIndex={localStorage.getItem("active_index")} onTabChange={handleChange} panes={panes} />

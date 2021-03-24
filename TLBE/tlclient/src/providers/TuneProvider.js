@@ -1,6 +1,6 @@
 import React, { useState, createContext, useContext } from "react"
-// import { CollectionContext } from "../collections/CollectionsProvider"
-
+// import { CollectionContext } from "../providers/CollectionsProvider"
+import { UserProfileContext } from "./UserProfileProvider"
 export const TuneContext = createContext()
 
 export const TuneProvider = props => {
@@ -8,7 +8,7 @@ export const TuneProvider = props => {
 
     const [tunes, setTunes] = useState([])
     const [tune, setTune] = useState({})
-    const { getCollectionsByUserId, saveCollection, deleteUnusedCollections } = useContext(CollectionContext)
+    // const { getCollectionsByUserId, saveCollection, deleteUnusedCollections } = useContext(CollectionContext)
 
     //need a getTunes for the TOD
 
@@ -83,7 +83,7 @@ export const TuneProvider = props => {
         return fetch(`http://localhost:8088/tunes/${tuneId}`, {
             method: 'DELETE'
         })
-            .then(deleteUnusedCollections)
+        // .then(deleteUnusedCollections)
     }
 
 

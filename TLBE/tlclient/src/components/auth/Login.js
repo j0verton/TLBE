@@ -1,7 +1,7 @@
 import React, { useRef, useContext, useState } from "react"
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import { UserProfileContext } from "../../providers/UserProfileProvider"
 import { useHistory } from "react-router-dom"
 import { Button, Divider, Image } from "semantic-ui-react"
 import logo from "../../img/TuneListLogo.png"
@@ -9,6 +9,7 @@ import logo from "../../img/TuneListLogo.png"
 import "./Login.css"
 
 export const Login = props => {
+
     const { login, logout } = useContext(UserProfileContext);
     const [loading, setLoading] = useState(false);
     const email = useRef()

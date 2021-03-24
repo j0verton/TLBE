@@ -2,13 +2,13 @@ import React, { useContext, useEffect, useState } from "react"
 import { useHistory, useParams } from 'react-router-dom';
 import { Button, Form, Header, Checkbox, Rating } from "semantic-ui-react";
 // import { CollectionContext } from "../../providers/";
-// import { TuningContext } from "../tunings/TuningsProvider";
+import { TuningContext } from "../../providers/TuningsProvider";
 import "./Tune.css"
-// import { TuneContext } from "./TuneProvider";
+import { TuneContext } from "../../providers/TuneProvider";
 
 export const TuneForm = () => {
-    // const { saveTune, editTune, getTuneById, addAudioToTune, addTuneCollections } = useContext(TuneContext)
-    // const { tunings, getTunings, addTuning } = useContext(TuningContext)
+    const { addTune, editTune, getTuneById, addAudioToTune, addTuneCollections } = useContext(TuneContext)
+    const { tunings, getTunings, addTuning } = useContext(TuningContext)
     // const { addCustomCollection, editCollection, getCustomCollectionsByUserId } = useContext(CollectionContext)
     // const [tune, setTune] = useState({})
     // const [isLoading, setIsLoading] = useState(true)
@@ -37,25 +37,25 @@ export const TuneForm = () => {
     //     }
     // }, [])
 
-    // useEffect(() => {
-    //     getCustomCollectionsByUserId(localStorage.getItem("tunes_user"))
-    //         .then(res => {
-    //             userCustomCollections = res
-    //             //chain is breaking here loosing the data
-    //             let collectionOptions = userCustomCollections.map(collection => {
-    //                 console.log(collection)
-    //                 collection.text = collection.name
-    //                 collection.value = collection.id
-    //                 return collection
-    //             })
-    //             console.log(collectionOptions)
-    //             setCustomCollections(collectionOptions)
-    //         })
+    useEffect(() => {
+        getCustomCollectionsByUserId(localStorage.getItem("tunes_user"))
+            .then(res => {
+                userCustomCollections = res
+                //chain is breaking here loosing the data
+                let collectionOptions = userCustomCollections.map(collection => {
+                    console.log(collection)
+                    collection.text = collection.name
+                    collection.value = collection.id
+                    return collection
+                })
+                console.log(collectionOptions)
+                setCustomCollections(collectionOptions)
+            })
 
-    //         // .then(setCustomCollections)
-    //         .then(() => {
-    //         })
-    // }, [])
+            // .then(setCustomCollections)
+            .then(() => {
+            })
+    }, [])
 
     // const uploadImage = async e => {
     //     const files = e.target.files

@@ -4,11 +4,11 @@ import { TuneContext } from "./providers/TuneProvider"
 import "./Home.css"
 import { TuneCard } from "./components/tunes/TuneCard";
 import { AudioPlayer } from "./components/AudioPlayer";
-// import { PhotoContext } from "./components/photo/PhotoProvider";
+import { PhotoContext } from "./providers/PhotoProvider";
 
 export const Home = () => {
     const { getTunes, getStarredTunesByUserId, addStarToTune, removeStarFromTune } = useContext(TuneContext)
-    // const { getPhotos } = useContext(PhotoContext)
+    const { getPhotos } = useContext(PhotoContext)
     const [tunes, setTunes] = useState([])
     const [modal, showModal] = useState(false)
     const [tuneObj, setTuneObj] = useState({})

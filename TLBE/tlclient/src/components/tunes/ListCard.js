@@ -2,7 +2,7 @@ import React, { useState, useRef, useContext, useEffect } from "react"
 import "./Tune.css"
 import { Button, Container, Divider, Header, Rating } from 'semantic-ui-react'
 import { TuneCard } from "./TuneCard"
-// import { TuneContext } from "./TuneProvider"
+import { TuneContext } from "../../providers/TuneProvider"
 // import { CollectionContext } from "../collections/CollectionsProvider"
 import { AudioPlayer } from "../AudioPlayer"
 
