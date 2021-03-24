@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react"
 import { useHistory, useParams } from 'react-router-dom';
 import { Button, Form, Header, Checkbox, Rating } from "semantic-ui-react";
-// import { CollectionContext } from "../../providers/";
+import { CollectionContext } from "../../providers/CollectionProvider";
 import { TuningContext } from "../../providers/TuningsProvider";
 import "./Tune.css"
 import { TuneContext } from "../../providers/TuneProvider";
@@ -10,18 +10,18 @@ export const TuneForm = () => {
     const { addTune, editTune, getTuneById, addAudioToTune, addTuneCollections } = useContext(TuneContext)
     const { tunings, getTunings, addTuning } = useContext(TuningContext)
     const { addCustomCollection, getCustomCollectionsByUserId } = useContext(CollectionContext)
-    // const [tune, setTune] = useState({})
+    const [tune, setTune] = useState({})
     const [isLoading, setIsLoading] = useState(true)
 
     const { tuneId } = useParams()
     let userCustomCollections
-    // let currentCollection
+    let currentCollection
     const history = useHistory()
-    // const [image, setImage] = useState('')
-    // const [audio, setAudio] = useState('')
-    // const [loading, setLoading] = useState(false)
-    // const [customCollections, setCustomCollections] = useState([])
-    // const [customCollection, setCustomCollection] = useState()
+    const [image, setImage] = useState('')
+    const [audio, setAudio] = useState('')
+    const [loading, setLoading] = useState(false)
+    const [customCollections, setCustomCollections] = useState([])
+    const [customCollection, setCustomCollection] = useState()
 
     useEffect(() => {
         getTunings()

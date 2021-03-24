@@ -26,7 +26,8 @@ export const CollectionProvider = props => {
     const deleteCollection = collectionId => {
         return fetch(`http://localhost:8088/collections/${collectionId}`, {
             method: 'DELETE'
-        }).then(getCollections)
+        })
+        // .then(getCollections)
     }
 
     //delete unused Collections - need this somewhere, maybe server side
@@ -34,7 +35,7 @@ export const CollectionProvider = props => {
 
     return (
         <CollectionContext.Provider value={{
-            collections, tuneCollections, getCollections, saveCollection, deleteCollection, getCollectionsByUserId, getTuneCollectionsByCollectionIdWithTunes, deleteUnusedCollections, addCustomCollection, editCollection, getCustomCollectionsByUserId
+            deleteCollection, addCustomCollection, getCustomCollectionsByUserId
         }}>
             {props.children}
         </CollectionContext.Provider>
