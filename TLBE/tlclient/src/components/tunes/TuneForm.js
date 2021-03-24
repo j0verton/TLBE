@@ -9,33 +9,34 @@ import { TuneContext } from "../../providers/TuneProvider";
 export const TuneForm = () => {
     const { addTune, editTune, getTuneById, addAudioToTune, addTuneCollections } = useContext(TuneContext)
     const { tunings, getTunings, addTuning } = useContext(TuningContext)
-    // const { addCustomCollection, editCollection, getCustomCollectionsByUserId } = useContext(CollectionContext)
+    const { addCustomCollection, getCustomCollectionsByUserId } = useContext(CollectionContext)
     // const [tune, setTune] = useState({})
-    // const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(true)
 
-    // const { tuneId } = useParams()
-    // let userCustomCollections
+    const { tuneId } = useParams()
+    let userCustomCollections
     // let currentCollection
-    // const history = useHistory()
+    const history = useHistory()
     // const [image, setImage] = useState('')
     // const [audio, setAudio] = useState('')
     // const [loading, setLoading] = useState(false)
     // const [customCollections, setCustomCollections] = useState([])
     // const [customCollection, setCustomCollection] = useState()
-    // useEffect(() => {
-    //     getTunings()
-    //     if (tuneId) {
-    //         getTuneById(tuneId)
-    //             .then(tune => {
-    //                 setTune(tune)
-    //                 setIsLoading(false)
-    //                 setAudio(tune.audioUpload)
-    //                 setImage(tune.imageUpload)
-    //             })
-    //     } else {
-    //         setIsLoading(false)
-    //     }
-    // }, [])
+
+    useEffect(() => {
+        getTunings()
+        if (tuneId) {
+            getTuneById(tuneId)
+                .then(tune => {
+                    setTune(tune)
+                    setIsLoading(false)
+                    setAudio(tune.audioUpload)
+                    setImage(tune.imageUpload)
+                })
+        } else {
+            setIsLoading(false)
+        }
+    }, [])
 
     useEffect(() => {
         getCustomCollectionsByUserId(localStorage.getItem("tunes_user"))
@@ -57,120 +58,120 @@ export const TuneForm = () => {
             })
     }, [])
 
-    // const uploadImage = async e => {
-    //     const files = e.target.files
-    //     const data = new FormData()
-    //     data.append('file', files[0])
-    //     data.append('upload_preset', "tunelist")
-    //     setLoading(true)
-    //     const response = await fetch(
-    //         'https://api.cloudinary.com/v1_1/banjo/image/upload',
-    //         {
-    //             method: 'POST',
-    //             body: data
-    //         }
-    //     )
-    //     const file = await response.json()
-    //     setImage(file.secure_url)
-    //     setLoading(false)
-    // }
+    const uploadImage = async e => {
+        const files = e.target.files
+        const data = new FormData()
+        data.append('file', files[0])
+        data.append('upload_preset', "tunelist")
+        setLoading(true)
+        const response = await fetch(
+            'https://api.cloudinary.com/v1_1/banjo/image/upload',
+            {
+                method: 'POST',
+                body: data
+            }
+        )
+        const file = await response.json()
+        setImage(file.secure_url)
+        setLoading(false)
+    }
 
-    // const uploadAudio = async e => {
-    //     const files = e.target.files
-    //     const data = new FormData()
-    //     data.append('file', files[0])
-    //     data.append('upload_preset', "tunelist")
-    //     setLoading(true)
-    //     const response = await fetch(
-    //         'https://api.cloudinary.com/v1_1/banjo/video/upload',
-    //         {
-    //             method: 'POST',
-    //             body: data
-    //         }
-    //     )
-    //     const file = await response.json()
-    //     setAudio(file.secure_url)
-    //     addAudioToTune(audio)
-    //     setLoading(false)
-    // }
+    const uploadAudio = async e => {
+        const files = e.target.files
+        const data = new FormData()
+        data.append('file', files[0])
+        data.append('upload_preset', "tunelist")
+        setLoading(true)
+        const response = await fetch(
+            'https://api.cloudinary.com/v1_1/banjo/video/upload',
+            {
+                method: 'POST',
+                body: data
+            }
+        )
+        const file = await response.json()
+        setAudio(file.secure_url)
+        addAudioToTune(audio)
+        setLoading(false)
+    }
 
-    // const constructNewTune = async () => {
-    //     setIsLoading(true)
-    //     if (tuneId) {
-    //         await editTune({
-    //             id: tune.id,
-    //             userId: parseInt(localStorage.getItem("tunes_user")),
-    //             name: tune.name,
-    //             key: tune.key,
-    //             tuning: tune.tuning,
-    //             source: tune.source,
-    //             notes: tune.notes,
-    //             link: tune.link,
-    //             starred: tune.starred,
-    //             learning: tune.learning,
-    //             audioUpload: audio,
-    //             imageUpload: image
-    //         })
-    //         addTuneCollections({
-    //             tuneId: tune.id,
-    //             collectionId: customCollection
-    //         }
-    //         )
-    //         history.push('/tunes')
-    //     } else {
-    //         await saveTune({
-    //             userId: parseInt(localStorage.getItem("tunes_user")),
-    //             name: tune.name,
-    //             key: tune.key,
-    //             tuning: tune.tuning ? tune.tuning : "Standard",
-    //             source: tune.source,
-    //             notes: tune.notes,
-    //             link: tune.link,
-    //             starred: tune.starred,
-    //             learning: tune.learning,
-    //             audioUpload: audio,
-    //             imageUpload: image
-    //         })
-    //         history.push('/tunes')
+    const constructNewTune = async () => {
+        setIsLoading(true)
+        if (tuneId) {
+            await editTune({
+                id: tune.id,
+                userId: parseInt(localStorage.getItem("tunes_user")),
+                name: tune.name,
+                key: tune.key,
+                tuning: tune.tuning,
+                source: tune.source,
+                notes: tune.notes,
+                link: tune.link,
+                starred: tune.starred,
+                learning: tune.learning,
+                audioUpload: audio,
+                imageUpload: image
+            })
+            addTuneCollections({
+                tuneId: tune.id,
+                collectionId: customCollection
+            }
+            )
+            history.push('/tunes')
+        } else {
+            await addTune({
+                userId: parseInt(localStorage.getItem("tunes_user")),
+                name: tune.name,
+                key: tune.key,
+                tuning: tune.tuning ? tune.tuning : "Standard",
+                source: tune.source,
+                notes: tune.notes,
+                link: tune.link,
+                starred: tune.starred,
+                learning: tune.learning,
+                audioUpload: audio,
+                imageUpload: image
+            })
+            history.push('/tunes')
 
-    //     }
-    // }
+        }
+    }
 
-    // const handleControlledInputChange = (event) => {
-    //     const newTune = { ...tune }
-    //     newTune[event.target.name] = event.target.value
-    //     setTune(newTune)
-    // }
-    // const handleDropdown = (event, data) => {
-    //     const newTune = { ...tune }
-    //     newTune[data.name] = data.value
-    //     setTune(newTune)
-    // }
+    const handleControlledInputChange = (event) => {
+        const newTune = { ...tune }
+        newTune[event.target.name] = event.target.value
+        setTune(newTune)
+    }
+    const handleDropdown = (event, data) => {
+        const newTune = { ...tune }
+        newTune[data.name] = data.value
+        setTune(newTune)
+    }
 
-    // const handleCCDropdown = (event, data) => {
-    //     setCustomCollection(data.value)
-    //     currentCollection = data.value
-    // }
-    // const handleCheckbox = (event, data) => {
-    //     const newTune = { ...tune }
-    //     newTune[data.name] = data.checked
-    //     setTune(newTune)
-    // }
-    // const handleStar = (event, data) => {
-    //     const newTune = { ...tune }
-    //     newTune[data.name] = data.rating
-    //     setTune(newTune)
-    // }
+    const handleCCDropdown = (event, data) => {
+        setCustomCollection(data.value)
+        currentCollection = data.value
+    }
+    const handleCheckbox = (event, data) => {
+        const newTune = { ...tune }
+        newTune[data.name] = data.checked
+        setTune(newTune)
+    }
+    const handleStar = (event, data) => {
+        const newTune = { ...tune }
+        newTune[data.name] = data.rating
+        setTune(newTune)
+    }
 
-    // const handleAddition = (event, data) => {
-    //     let newTuning = {
-    //         key: data.value,
-    //         text: data.value,
-    //         value: data.value
-    //     }
-    //     addTuning(newTuning)
-    //         .then(getTunings)
-    // }
+    const handleAddition = (event, data) => {
+        let newTuning = {
+            key: data.value,
+            text: data.value,
+            value: data.value
+        }
+        addTuning(newTuning)
+            .then(getTunings)
+    }
 
     return (
         <>
