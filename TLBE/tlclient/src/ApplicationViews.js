@@ -6,7 +6,7 @@ import { Home } from "./Home"
 import { ListCard } from "./components/tunes/ListCard"
 import { TunesList } from "./components/tunes/TuneCollectionList"
 // import { CollectionProvider } from "./components/collections/CollectionsProvider"
-import { UserProvider } from "./providers/UserProvider"
+import { UserProfileProvider } from "./providers/UserProfileProvider"
 import { UserList } from "./components/user/UserList"
 import { TuningProvider } from "./providers/TuningsProvider"
 import { PhotoProvider } from "./providers/PhotoProvider"
@@ -17,7 +17,7 @@ export const ApplicationViews = (props) => {
         <>
             {/* <CollectionProvider> */}
             <TuneProvider>
-                <UserProvider>
+                <UserProfileProvider>
                     <TuningProvider>
                         <PhotoProvider>
 
@@ -47,7 +47,7 @@ export const ApplicationViews = (props) => {
 
                         </PhotoProvider>
                     </TuningProvider>
-                </UserProvider>
+                </UserProfileProvider>
             </TuneProvider>
             {/* </CollectionProvider> */}
         </>
