@@ -7,7 +7,7 @@ import { AudioPlayer } from "./components/AudioPlayer";
 import { PhotoContext } from "./providers/PhotoProvider";
 
 export const Home = () => {
-    const { getTunes, getStarredTunesByUserId, addStarToTune, removeStarFromTune } = useContext(TuneContext)
+    const { getTunes, getTunesInCollectionForCurrentUser, getStarredTunesByUserId, addStarToTune, removeStarFromTune } = useContext(TuneContext)
     const { getPhotos } = useContext(PhotoContext)
     const [tunes, setTunes] = useState([])
     const [modal, showModal] = useState(false)
@@ -35,7 +35,8 @@ export const Home = () => {
                     setBackground(response[num])
                 }
             })
-        getTunes()
+        //should switch this to get a single random tune from the API
+        getTunesInCollectionForCurrentUser()
             .then(response => {
                 let num = Math.floor(Math.random() * response.length)
                 setTuneOfTheDay(response[num])

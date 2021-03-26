@@ -17,5 +17,9 @@ namespace TLBE.Models
             CollectionId = collId;
                 TuneId = tuneId;
         }
+
+        public TuneCollection()
+        {
+        }
     }
 }

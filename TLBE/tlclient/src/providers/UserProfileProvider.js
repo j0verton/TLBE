@@ -19,9 +19,6 @@ export function UserProfileProvider(props) {
     }, []);
 
     const login = (email, pw) => {
-        console.log("email", email.current.value)
-        console.log("pw", pw.current.value)
-
         return firebase
             .auth()
             .signInWithEmailAndPassword(email.current.value, pw.current.value)

@@ -16,6 +16,6 @@ namespace TLBE.Models
 
         public string Email { get; set; }
 
-        public List<Collection> Collections { get; set; }
+        //public List<Collection> Collections { get; set; }
     }
 }
