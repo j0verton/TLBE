@@ -4,6 +4,8 @@ import { ApplicationViews } from "./ApplicationViews";
 import { NavBar } from "./components/nav/NavBar";
 import { Login } from "./components/auth/Login";
 import { Register } from "./components/auth/Register";
+import { UserProfileProvider } from "./providers/UserProfileProvider"
+
 import logo from './logo.svg';
 import './App.css';
 
@@ -15,8 +17,10 @@ function TuneList() {
           if (localStorage.getItem("tunes_user")) {
             return (
               <>
-                <NavBar />
-                <ApplicationViews />
+                <UserProfileProvider>
+                  <NavBar />
+                  <ApplicationViews />
+                </UserProfileProvider>
               </>
             );
           } else {
@@ -24,13 +28,14 @@ function TuneList() {
           }
         }}
       />
-
-      <Route path="/login">
-        <Login />
-      </Route>
-      <Route path="/register">
-        <Register />
-      </Route>
+      <UserProfileProvider>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/register">
+          <Register />
+        </Route>
+      </UserProfileProvider>
     </>
   )
 };
