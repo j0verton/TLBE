@@ -21,15 +21,7 @@ export const TuneProvider = props => {
                         Authorization: `Bearer ${token}`,
                     },
                 })
-                    .then(res => {
-                        console.log("res1", res)
-                        return res
-                    })
             }).then(response => response.json())
-            .then(res => {
-                console.log("res2", res)
-                return res
-            })
     }
 
     const addTune = tuneObj => {

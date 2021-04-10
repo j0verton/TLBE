@@ -73,7 +73,7 @@ export const ListCard = ({ collectionId, parentCallback, tunesArr }) => {
                             className="rating"
                             id={`tune__${tune.id}`}
                             onRate={handleStar}
-                            defaultRating={tune?.starred}
+                            Rating={tune?.starred}
                         />
                     </div>
                 </Button>

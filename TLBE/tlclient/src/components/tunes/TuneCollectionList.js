@@ -22,21 +22,17 @@ export const TunesList = (props) => {
 
     useEffect(() => {
         getTunesInCollectionForCurrentUser().then(res => {
-            console.log("res in UE", res)
             setUserCollections(res)
             return res
-        }).then(() => {
-            if (userCollections) {
-                console.log("userCollections", userCollections)
-                let paneObjects = userCollections.map(c => {
-                    console.log("c", c)
-                    return { menuItem: c.collection.name, render: () => <Tab.Pane>{<ListCard key={c.collection.id} parentCallback={handleChange} collectionId={c.collection.id} tunesArr={c.tunes} />}</Tab.Pane> }
-                })
-                setPanes(paneObjects)
-            }
         })
-        //might need to add a vaue here
     }, [])
+
+    useEffect(() => {
+        let paneObjects = userCollections.map(c => {
+            return { menuItem: c.collection.name, render: () => <Tab.Pane>{<ListCard key={c.collection.id} parentCallback={handleChange} collectionId={c.collection.id} tunesArr={c.tunes} />}</Tab.Pane> }
+        })
+        setPanes(paneObjects)
+    }, [userCollections])
 
     return panes.length ? (
         <Tab renderActiveOnly id="ListTabs" activeIndex={localStorage.getItem("active_index")} onTabChange={handleChange} panes={panes} />
