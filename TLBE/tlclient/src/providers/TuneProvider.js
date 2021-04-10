@@ -15,17 +15,20 @@ export const TuneProvider = props => {
     const getTunesInCollectionForCurrentUser = () => {
         return getToken()
             .then(token => {
-                fetch(`/api/collections`, {
+                return fetch(`/api/collections`, {
                     method: "GET",
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 })
-                    .then(response => response.json())
-                // .then(res => {
-                //     console.log(res)
-                //     return res
-                // })
+                    .then(res => {
+                        console.log("res1", res)
+                        return res
+                    })
+            }).then(response => response.json())
+            .then(res => {
+                console.log("res2", res)
+                return res
             })
     }
 
