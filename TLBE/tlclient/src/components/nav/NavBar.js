@@ -32,7 +32,7 @@ export const NavBar = (props) => {
                 </li>
                 <li className="navbar__item active logout">
                     <Link className="navbar__link" onClick={() => {
-                        localStorage.removeItem("tunes_user")
+                        localStorage.removeItem("userProfile")
                     }}
                         to="/login"><Icon name="eject" /><p className="nav__text">Logout</p></Link>
                 </li>

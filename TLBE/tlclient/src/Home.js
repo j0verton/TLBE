@@ -17,7 +17,7 @@ export const Home = () => {
     const [tuneOfTheDay, setTuneOfTheDay] = useState({})
 
     useEffect(() => {
-        getStarredTunesByUserId(localStorage.getItem("tunes_user"))
+        getStarredTunesByUserId(localStorage.getItem("userProfile"))
             .then(allUserTunes => {
                 setTunes(allUserTunes)
             })
@@ -26,7 +26,7 @@ export const Home = () => {
     useEffect(() => {
         getPhotos()
             .then(response => {
-                let userBackgrounds = response.filter(photo => photo.userId === parseInt(localStorage.getItem("tunes_user")))
+                let userBackgrounds = response.filter(photo => photo.userId === parseInt(localStorage.getItem("userProfile")))
                 if (userBackgrounds.length) {
                     let num = Math.floor(Math.random() * userBackgrounds.length)
                     setBackground(userBackgrounds[num])

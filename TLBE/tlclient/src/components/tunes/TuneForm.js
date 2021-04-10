@@ -39,7 +39,7 @@ export const TuneForm = () => {
     }, [])
 
     useEffect(() => {
-        getCustomCollectionsByUserId(localStorage.getItem("tunes_user"))
+        getCustomCollectionsByUserId(localStorage.getItem("userProfile"))
             .then(res => {
                 userCustomCollections = res
                 //chain is breaking here loosing the data
@@ -100,7 +100,7 @@ export const TuneForm = () => {
         if (tuneId) {
             await editTune({
                 id: tune.id,
-                userId: parseInt(localStorage.getItem("tunes_user")),
+                userId: parseInt(localStorage.getItem("userProfile")),
                 name: tune.name,
                 key: tune.key,
                 tuning: tune.tuning,
@@ -120,7 +120,7 @@ export const TuneForm = () => {
             history.push('/tunes')
         } else {
             await addTune({
-                userId: parseInt(localStorage.getItem("tunes_user")),
+                userId: parseInt(localStorage.getItem("userProfile")),
                 name: tune.name,
                 key: tune.key,
                 tuning: tune.tuning ? tune.tuning : "Standard",

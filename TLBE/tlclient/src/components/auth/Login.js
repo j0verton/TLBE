@@ -41,7 +41,7 @@ export const Login = props => {
         // existingUserCheck()
         //     .then(exists => {
         //         if (exists) {
-        //             localStorage.setItem("tunes_user", exists.id)
+        //             localStorage.setItem("userProfile", exists.id)
         //             history.push("/")
         //         } else {
         //             existDialog.current.showModal()

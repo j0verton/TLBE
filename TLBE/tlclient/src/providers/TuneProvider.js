@@ -14,7 +14,7 @@ export const TuneProvider = props => {
 
     const getTunesInCollectionForCurrentUser = () => {
         return getToken()
-            .then(token =>
+            .then(token => {
                 fetch(`/api/collections`, {
                     method: "GET",
                     headers: {
@@ -22,7 +22,11 @@ export const TuneProvider = props => {
                     },
                 })
                     .then(response => response.json())
-            )
+                // .then(res => {
+                //     console.log(res)
+                //     return res
+                // })
+            })
     }
 
     const addTune = tuneObj => {

@@ -55,12 +55,12 @@ export const TuneCard = (props) => {
                 }
             </Modal.Content>
             <Modal.Actions >
-                {tuneObj.userId === parseInt(localStorage.getItem("tunes_user")) ?
+                {tuneObj.userId === parseInt(localStorage.getItem("userProfile")) ?
                     <Button icon onClick={() => {
                         history.push(`/tunes/edit/${tuneObj?.id}`)
                     }}><Icon name='edit outline' /></Button>
                     : null}
-                {tuneObj.userId === parseInt(localStorage.getItem("tunes_user")) ?
+                {tuneObj.userId === parseInt(localStorage.getItem("userProfile")) ?
                     <Button color="red" icon id="deleteTune--${tune.id}" className="trashBtn" onClick={
                         () => {
                             deleteTune(tuneObj.id)
@@ -69,11 +69,11 @@ export const TuneCard = (props) => {
                         }}>
                         <Icon name='trash alternate outline' /></Button>
                     : null}
-                {tuneObj.userId !== parseInt(localStorage.getItem("tunes_user")) ?
+                {tuneObj.userId !== parseInt(localStorage.getItem("userProfile")) ?
                     <Button icon id="addTune--${tune.id}" className="addTune" onClick={
                         () => {
                             let newTuneObj = { ...tuneObj }
-                            newTuneObj.userId = parseInt(localStorage.getItem("tunes_user"))
+                            newTuneObj.userId = parseInt(localStorage.getItem("userProfile"))
                             delete newTuneObj.id
                             newTuneObj.notes = ""
                             addTune(newTuneObj)

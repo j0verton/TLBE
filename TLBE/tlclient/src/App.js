@@ -14,7 +14,7 @@ function TuneList() {
     <>
       <Route
         render={() => {
-          if (localStorage.getItem("tunes_user")) {
+          if (localStorage.getItem("userProfile")) {
             return (
               <>
                 <UserProfileProvider>

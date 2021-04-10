@@ -12,7 +12,7 @@ export const PhotoProvider = props => {
             },
             body: JSON.stringify(
                 {
-                    userId: parseInt(localStorage.getItem("tunes_user")),
+                    userId: parseInt(localStorage.getItem("userProfile")),
                     url: url
                 }
             )

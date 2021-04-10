@@ -11,7 +11,7 @@ export const CollectionProvider = props => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                userId: parseInt(localStorage.getItem("tunes_user")),
+                userId: parseInt(localStorage.getItem("userProfile")),
                 name: collectionName,
                 custom: true
             })

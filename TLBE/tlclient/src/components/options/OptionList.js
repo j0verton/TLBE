@@ -31,7 +31,7 @@ export const OptionsList = () => {
     //     )
     //     const responseImage = await response.json()
     //     await addPhoto(responseImage.url)
-    //     // let photos = await getPhotosByUserId(localStorage.getItem("tunes_user")) 
+    //     // let photos = await getPhotosByUserId(localStorage.getItem("userProfile")) 
     //     // setImages(photos)
     //     setLoading(false)
     // }
@@ -56,12 +56,12 @@ export const OptionsList = () => {
     // }
 
     // useEffect(() => {
-    //     getPhotosByUserId(localStorage.getItem("tunes_user"))
+    //     getPhotosByUserId(localStorage.getItem("userProfile"))
     //         .then(setImages)
     // }, [loading])
 
     // useEffect(() => {
-    //     getCustomCollectionsByUserId(localStorage.getItem("tunes_user"))
+    //     getCustomCollectionsByUserId(localStorage.getItem("userProfile"))
     //         .then(setCustomCollections)
     // }, [loading, collection])
 

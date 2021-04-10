@@ -6,6 +6,7 @@ import { TuneContext } from "../../providers/TuneProvider"
 import { ListCard } from "./ListCard"
 
 export const TunesList = (props) => {
+
     const { getTunesByUserId, getTunesInCollectionForCurrentUser } = useContext(TuneContext)
     // const { collections, getCollectionsByUserId } = useContext(CollectionContext)
     const [tunes, setTunes] = useState([])
@@ -21,14 +22,18 @@ export const TunesList = (props) => {
 
     useEffect(() => {
         getTunesInCollectionForCurrentUser().then(setUserCollections).then(() => {
+            console.log(userCollections)
             if (userCollections) {
+                console.log(userCollections)
+                debugger
                 let paneObjects = userCollections.map(collection => {
                     return { menuItem: collection.name, render: () => <Tab.Pane>{<ListCard key={collection.id} parentCallback={handleChange} collectionId={collection.id} tunesArr={collection.tuneCollections} />}</Tab.Pane> }
                 })
                 setPanes(paneObjects)
             }
         })
-    }, [userCollections, tunes, changes])
+        //might need to add a vaue here
+    }, [])
 
     return panes.length ? (
         <Tab renderActiveOnly id="ListTabs" activeIndex={localStorage.getItem("active_index")} onTabChange={handleChange} panes={panes} />

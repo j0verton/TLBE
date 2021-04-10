@@ -111,7 +111,12 @@ namespace TLBE.Controllers
                 };
                 Collection newColl = _collectionRepository.saveCollection(collToAdd);
 
-                var tc = new TuneCollection(newColl.Id, tune.Id);
+                var tc = new TuneCollection()
+                {
+                    CollectionId = newColl.Id,
+                    TuneId = tune.Id
+                };
+                    
                 _tuneRepo.AddTuneCollection(tc);
                 
             }
@@ -119,7 +124,11 @@ namespace TLBE.Controllers
             {
                 //collection exists
                 //add TC
-                var tc = new TuneCollection(currentCollection[0].Id, tune.Id);
+                var tc = new TuneCollection()
+                {
+                    CollectionId = currentCollection[0].Id,
+                    TuneId = tune.Id
+                };
 
                 _tuneRepo.AddTuneCollection(tc);
 

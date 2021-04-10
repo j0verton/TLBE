@@ -21,7 +21,7 @@ namespace TLBE.Models
         public bool Starred { get; set; }
 
         //fix db then uncomment
-        public bool Learning { get; set; }
+        public bool? Learning { get; set; }
         public string AudioUpload { get; set; }
 
     }
