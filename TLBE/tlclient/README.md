@@ -1,3 +1,11 @@
+to do list:
+
+ sort collections by number of tunes
+ add button showing up in model at the wrong times
+ ...many more
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
 ## Available Scripts
